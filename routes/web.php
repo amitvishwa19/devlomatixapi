@@ -21,7 +21,7 @@ $router->get('/', function () use ($router) {
 
 
 
-
+$router->post('auth/login', 'AuthController@login');
 
 // $router->group(['prefix' => 'v1','middleware'=>[]],function() use ($router){
 
@@ -34,7 +34,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
 
-    $router->post('login', 'AuthController@login');
+
 
     $router->get('users', function () {
         $users = User::get();
@@ -42,8 +42,6 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     });
 
     $router->group(['middleware'=>['auth']],function() use ($router){
-
-
 
 
 
