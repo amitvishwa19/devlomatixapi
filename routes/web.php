@@ -36,13 +36,15 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->post('login', 'AuthController@login');
 
+    $router->get('users', function () {
+        $users = User::get();
+        return $users;
+    });
+
     $router->group(['middleware'=>['auth']],function() use ($router){
 
 
-        $router->get('users', function () {
-            $users = User::get();
-            return $users;
-        });
+
 
 
     });
