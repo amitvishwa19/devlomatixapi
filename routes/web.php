@@ -43,7 +43,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->group(['middleware'=>['auth']],function() use ($router){
 
-
+        $router->get('auth/user', 'AuthController@user');
 
     });
 
