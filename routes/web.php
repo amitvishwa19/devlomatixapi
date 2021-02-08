@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -15,4 +17,35 @@
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+
+
+
+
+// $router->group(['prefix' => 'v1','middleware'=>[]],function() use ($router){
+
+//     $router->get('users', function () {
+//         // Matches The "/accounts/{accountId}/detail" URL
+//         return 'Users';
+//     });
+
+// });
+
+$router->group(['prefix' => 'v1'], function () use ($router) {
+
+    $router->post('login', 'AuthController@login');
+
+    $router->group(['middleware'=>['auth']],function() use ($router){
+
+
+        $router->get('users', function () {
+            $users = User::get();
+            return $users;
+        });
+
+
+    });
+
+
 });
