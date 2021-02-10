@@ -36,16 +36,32 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->post('auth/login', 'AuthController@login');
 
+    $router->get('classroom', 'ClassroomController@index');
+
     $router->get('users', function () {
         $users = User::get();
         return $users;
     });
 
-    $router->group(['middleware'=>['auth']],function() use ($router){
+    $router->group(['prefix' => 'auth','middleware'=>['auth']],function() use ($router){
 
-        $router->get('auth/user', 'AuthController@user');
+        $router->get('user', 'AuthController@user');
+        $router->get('refresh', 'AuthController@refresh');
+
 
     });
+
+    $router->group(['prefix' => 'user','middleware'=>['auth']],function() use ($router){
+
+        $router->get('classroom', 'ClassroomController@index');
+
+    });
+
+
+
+    // $router->group(['middleware'=>['auth']], function () use ($router) {
+    //     $router->get('classroom', 'ClassroomController@index');
+    // });
 
 
 });
