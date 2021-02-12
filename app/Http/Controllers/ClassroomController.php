@@ -22,8 +22,10 @@ class ClassroomController extends Controller
         $user = auth()->user();
 
         $classrooms = $user->clasrooms;
-        //$classrooms = Classroom::get();
-        return $classrooms;
+        //return $classrooms;
+
+        $classrooms = Classroom::with('user')->get();
+        //return $classrooms;
         return response()->json(ClassroomResource::collection($classrooms), 200);
 
 

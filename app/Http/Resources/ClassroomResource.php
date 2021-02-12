@@ -12,6 +12,13 @@ class ClassroomResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'status' => $this->status,
+            'user'=>[
+                'firstName'=>$this->user->firstName,
+                'lastName'=>$this->user->lastName,
+                'avatar'=>$this->user->avatarUrl,
+                'type'=>$this->user->type,
+                'status'=>$this->user->status,
+            ]
         ];
     }
 }
