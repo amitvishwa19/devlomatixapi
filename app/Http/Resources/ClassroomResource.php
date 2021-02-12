@@ -9,6 +9,8 @@ class ClassroomResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+            'code' => $this->classroom_code,
             'name' => $this->name,
             'description' => $this->description,
             'status' => $this->status,
