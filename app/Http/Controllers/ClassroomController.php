@@ -24,7 +24,7 @@ class ClassroomController extends Controller
         $classrooms = $user->clasrooms;
         //return $classrooms;
 
-        $classrooms = Classroom::with('user')->get();
+        $classrooms = Classroom::with('user')->orderBy('created_at','desc')->get();
         //return $classrooms;
         return response()->json(ClassroomResource::collection($classrooms), 200);
 
