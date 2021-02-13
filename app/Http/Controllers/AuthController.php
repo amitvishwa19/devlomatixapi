@@ -70,9 +70,9 @@ class AuthController extends Controller
             //$user->avatar_url = $avatar_url;
 
             $image_name = time().'_'.$request->file('avatar')->getClientOriginalName();
-            $destinationPath =  app()->basePath('public/uploads/avatars');
+            $destinationPath =  url('public/uploads/avatars');
             $request->file('avatar')->move($destinationPath, $image_name);
-            return url($destinationPath);
+            return $destinationPath;
 
 
         }
