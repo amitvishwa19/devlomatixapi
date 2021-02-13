@@ -25,6 +25,7 @@ class ClassroomController extends Controller
         //return $classrooms;
 
         $classrooms = Classroom::with('user')->orderBy('created_at','desc')->get();
+        //$classrooms = Classroom::orderby('created_at','desc')->latest('id');
         //return $classrooms;
         return response()->json(ClassroomResource::collection($classrooms), 200);
 

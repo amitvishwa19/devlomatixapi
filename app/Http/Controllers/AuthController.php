@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //use Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AuthController extends Controller
 {
@@ -44,7 +46,39 @@ class AuthController extends Controller
     public function user()
     {
         return response()->json($this->guard()->user(), 200);
-        //return response()->json(auth()->user(),200));
+        //$user = new UserResource($this->guard()->user());
+        //return response()->json($user, 200);
+    }
+
+    public function user_update(Request $request){
+
+        //return $request->file('avatar');
+        //$user = new UserResource($this->guard()->user());
+        //return response()->json($user, 200);
+        $user = $this->guard()->user();
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->type = $request->type;
+
+        if($request->avatar == 'remove'){
+            $user->avatar_url = null;
+        }
+
+        if($request->file('avatar')){
+            //$avatar_url = uploadImage($request->file('avatar'));
+            //$user->avatar_url = $avatar_url;
+
+            $image_name = time().'_'.$request->file('avatar')->getClientOriginalName();
+            $destinationPath =  app()->basePath('public/uploads/avatars');
+            $request->file('avatar')->move($destinationPath, $image_name);
+            return url($destinationPath);
+
+
+        }
+
+        $user->update();
+        return response()->json(new UserResource($this->guard()->user()), 200);
     }
 
     public function logout()

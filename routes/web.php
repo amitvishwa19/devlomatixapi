@@ -46,6 +46,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->group(['prefix' => 'auth','middleware'=>['auth']],function() use ($router){
 
         $router->get('user', 'AuthController@user');
+        $router->post('user/update', 'AuthController@user_update');
         $router->get('refresh', 'AuthController@refresh');
 
 
