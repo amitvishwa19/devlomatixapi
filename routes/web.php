@@ -55,6 +55,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->group(['prefix' => 'user','middleware'=>['auth']],function() use ($router){
 
         $router->get('classroom', 'ClassroomController@index');
+        $router->get('classroom/chapter', 'ChapterController@index');
 
     });
 

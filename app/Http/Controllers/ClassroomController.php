@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Classroom;
+use App\Http\Resources\TestResource;
+use App\Http\Resources\UserResource;
 use App\Http\Resources\ClassroomResource;
 
 class ClassroomController extends Controller
@@ -19,19 +22,19 @@ class ClassroomController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
+        $user =  auth()->user();
+        $classrooms = $user->classrooms;
 
-        $classrooms = $user->clasrooms;
-        //return $classrooms;
+        $classroom = Classroom::findOrFail(10);
+        $chapters = $classroom->chapters;
+        // foreach($classrooms as $classroom){
+        //     return $classroom->chapters;
+        // }
 
-        $classrooms = Classroom::with('user')->orderBy('created_at','desc')->get();
-        //$classrooms = Classroom::orderby('created_at','desc')->latest('id');
-        //return $classrooms;
+        return new TestResource(auth()->user());
+        $classrooms = $user->classrooms;
+        //return response()->json(new ClassroomResource($user), 200);
         return response()->json(ClassroomResource::collection($classrooms), 200);
-
-
-        //$user = auth()->user();
-        //return $user;
     }
 
     //

@@ -11,28 +11,20 @@ use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
-class Classroom extends Model
+class Question extends Model
 {
     use HasFactory;
 
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'description', 'status',
-    ];
 
-    public function user()
+    public function author()
     {
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\User');
     }
 
-    public function chapters()
-    {
-        return $this->belongsToMany('App\Models\Chapter','classroom_chapter');
-    }
+    // public function questions()
+    // {
+    //     return $this->belongsToMany('App\Models\Question','quiz_question');
+    // }
 
 }

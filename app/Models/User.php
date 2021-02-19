@@ -47,7 +47,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     //=======================Digital Learning=======================/
     public function classrooms()
     {
-        return $this->hasMany(Classroom::class,'user_id');
+        return $this->hasMany(Classroom::class)->where('status',true);
+
     }
+
+
 
 }
