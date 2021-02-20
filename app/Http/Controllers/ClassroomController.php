@@ -23,15 +23,15 @@ class ClassroomController extends Controller
     public function index()
     {
         $user =  auth()->user();
-        $classrooms = $user->classrooms;
+        //$classrooms = $user->classrooms;
 
-        $classroom = Classroom::findOrFail(10);
-        $chapters = $classroom->chapters;
+        //$classroom = Classroom::findOrFail(10);
+        //$chapters = $classroom->chapters;
         // foreach($classrooms as $classroom){
         //     return $classroom->chapters;
         // }
 
-        return new TestResource(auth()->user());
+        //return new TestResource(auth()->user());
         $classrooms = $user->classrooms;
         //return response()->json(new ClassroomResource($user), 200);
         return response()->json(ClassroomResource::collection($classrooms), 200);

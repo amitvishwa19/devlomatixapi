@@ -14,12 +14,23 @@ class ClassroomResource extends JsonResource
         $chapters = $classroom->chapters;
         return [
 
-                    'id' => $this->id,
-                    'code' => $this->classroom_code,
-                    'name' => $this->name,
-                    'description' => $this->description,
-                    'status' => $this->status,
-                    'chapters'=>ChapterResource::collection($chapters)
+            'user'=>[
+                    'id'=>$this->user->id,
+                    'firstName'=>$this->user->firstName,
+                    'lastName'=>$this->user->lastName,
+                    'avatar'=>$this->user->avatarUrl,
+                    'type'=>$this->user->type,
+                    'status'=>$this->user->status,
+                    'classrooms'=>[
+                        'id' => $this->id,
+                        'code' => $this->classroom_code,
+                        'name' => $this->name,
+                        'description' => $this->description,
+                        'overview' => $this->overview,
+                        'status' => $this->status,
+                        'chapters'=>ChapterResource::collection($chapters),
+                    ]
+                ],
 
         ];
     }
@@ -48,3 +59,10 @@ class ClassroomResource extends JsonResource
 //         ]
 //     ]
 // ],
+
+// 'id' => $this->id,
+// 'code' => $this->classroom_code,
+// 'name' => $this->name,
+// 'description' => $this->description,
+// 'status' => $this->status,
+// 'chapters'=>ChapterResource::collection($chapters)
